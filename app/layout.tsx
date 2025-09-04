@@ -8,6 +8,11 @@ const geistSans = Geist({
   subsets: ["latin"],
 });
 
+export const metadata = {
+  title: "My Portfolio | Deardo Satria",
+  // description: "Personal website",
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{

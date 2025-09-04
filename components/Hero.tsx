@@ -139,16 +139,13 @@ export default function Hero() {
               </p>
               <div className="flex flex-wrap gap-2 mb-3">
                 <span className="px-2 py-1 bg-neutral-800 text-xs rounded">
-                  React
-                </span>
-                <span className="px-2 py-1 bg-neutral-800 text-xs rounded">
-                  Node.js
+                  Next.js
                 </span>
                 <span className="px-2 py-1 bg-neutral-800 text-xs rounded">
                   Pyscript
                 </span>
                 <span className="px-2 py-1 bg-neutral-800 text-xs rounded">
-                  Postgresql
+                  PostgreSQL
                 </span>
                 <span className="px-2 py-1 bg-neutral-800 text-xs rounded">
                   Prisma ORM
@@ -166,7 +163,6 @@ export default function Hero() {
                   href="https://github.com/deardosatria7"
                   target="_blank"
                   className="text-xs border border-neutral-600 px-3 py-1 rounded hover:bg-white hover:text-black transition-colors"
-                  title="This is a private repository"
                 >
                   GitHub <ArrowUpRight className="w-3 h-3 inline ml-1" />
                 </a>
@@ -212,7 +208,6 @@ export default function Hero() {
                   href="https://github.com/deardosatria7"
                   target="_blank"
                   className="text-xs border border-neutral-600 px-3 py-1 rounded hover:bg-white hover:text-black transition-colors"
-                  title="This is a private repository"
                 >
                   GitHub <ArrowUpRight className="w-3 h-3 inline ml-1" />
                 </a>
