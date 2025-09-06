@@ -25,6 +25,9 @@ export default function PongGame() {
     let ballSpeedX = 2;
     let ballSpeedY = 2;
 
+    let playerScore = 0;
+    let enemyScore = 0;
+
     const drawRect = (
       x: number,
       y: number,
@@ -53,10 +56,18 @@ export default function PongGame() {
       ctx.setLineDash([]);
     };
 
-    const resetBall = () => {
+    const drawScore = () => {
+      ctx.fillStyle = "#ccc";
+      ctx.font = "12px monospace";
+      ctx.textAlign = "center";
+      ctx.fillText(`${playerScore}`, width / 4, 20); // kiri
+      ctx.fillText(`${enemyScore}`, (3 * width) / 4, 20); // kanan
+    };
+
+    const resetBall = (direction: number) => {
       ballX = width / 2;
       ballY = height / 2;
-      ballSpeedX = -ballSpeedX;
+      ballSpeedX = 2 * direction; // arah bola tergantung siapa yang kebobolan
       ballSpeedY = 2 * (Math.random() > 0.5 ? 1 : -1);
     };
 
@@ -69,7 +80,7 @@ export default function PongGame() {
         ballSpeedY = -ballSpeedY;
       }
 
-      // Bounce paddle kiri (kamu)
+      // Bounce paddle kiri (player)
       if (
         ballX - ballRadius < paddleWidth &&
         ballY > playerY &&
@@ -87,17 +98,22 @@ export default function PongGame() {
         ballSpeedX = -ballSpeedX;
       }
 
-      // Reset bola jika keluar
-      if (ballX + ballRadius > width || ballX - ballRadius < 0) {
-        resetBall();
+      // Reset bola + tambah skor
+      if (ballX - ballRadius < 0) {
+        enemyScore++;
+        resetBall(1); // arah ke kanan
+      }
+      if (ballX + ballRadius > width) {
+        playerScore++;
+        resetBall(-1); // arah ke kiri
       }
 
       // AI musuh (lemah)
       const enemyCenter = enemyY + paddleHeight / 2;
       if (enemyCenter < ballY - 10) {
-        enemyY += 2; // Lebih lambat
+        enemyY += 1.6; // Lebih lambat
       } else if (enemyCenter > ballY + 10) {
-        enemyY -= 2;
+        enemyY -= 1.6;
       }
     };
 
@@ -107,6 +123,7 @@ export default function PongGame() {
       drawRect(0, playerY, paddleWidth, paddleHeight, "#ccc");
       drawRect(width - paddleWidth, enemyY, paddleWidth, paddleHeight, "#ccc");
       drawBall(ballX, ballY, ballRadius, "#ccc");
+      drawScore();
     };
 
     const gameLoop = () => {
@@ -145,7 +162,7 @@ export default function PongGame() {
   }, []);
 
   return (
-    <div className="mt-36 text-center">
+    <div className="mt-20 text-center">
       <p className="mb-2 text-sm text-neutral-400">
         🎮 Bonus: Try beat me at Pong!
       </p>
