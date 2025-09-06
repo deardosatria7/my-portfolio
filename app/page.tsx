@@ -56,7 +56,7 @@ export default function Home() {
               href="https://wa.me/6288975523817"
               className="w-full hover:cursor-pointer hover:bg-white hover:text-black px-4 py-2 border-b-1 border-neutral-700 flex items-center gap-2 text-xs"
             >
-              +62-889-7552-3817 <ArrowUpRight className="w-3 h-3" />
+              Whatsapp Me <ArrowUpRight className="w-3 h-3" />
             </a>
             <a
               href="https://www.linkedin.com/in/deardo-satria-5a8b69278?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
