@@ -1,4 +1,6 @@
-import React, { useRef, useEffect } from "react";
+"use client";
+
+import React, { useRef, useEffect, useState } from "react";
 import {
   Clock,
   PerspectiveCamera,
@@ -25,6 +27,7 @@ import {
 import { RoomEnvironment } from "three/examples/jsm/environments/RoomEnvironment.js";
 import { Observer } from "gsap/Observer";
 import { gsap } from "gsap";
+import { Button } from "./ui/button";
 
 gsap.registerPlugin(Observer);
 
@@ -964,4 +967,61 @@ const Ballpit: React.FC<BallpitProps> = ({
   return <canvas className={`${className} w-full h-full`} ref={canvasRef} />;
 };
 
-export default Ballpit;
+export default function BallpitOverlay() {
+  const canvasRef = useRef<HTMLCanvasElement | null>(null);
+  const [active, setActive] = useState(false);
+  const ballpitInstance = useRef<any>(null);
+
+  useEffect(() => {
+    if (active && canvasRef.current) {
+      // Buat ballpit ketika aktif
+      ballpitInstance.current = createBallpit(canvasRef.current);
+    }
+    return () => {
+      // Hapus instance ketika tidak aktif
+      if (ballpitInstance.current) {
+        ballpitInstance.current.dispose();
+        ballpitInstance.current = null;
+      }
+    };
+  }, [active]);
+
+  return (
+    <>
+      {/* Tombol kecil di pojok kiri bawah */}
+      {!active && (
+        <button
+          onClick={() => setActive(true)}
+          className="fixed bottom-2 left-2 z-50 text-sm rounded-full shadow-lg opacity-10 hover:opacity-90"
+          title="Hmmm... What's this??"
+        >
+          ⚽
+        </button>
+      )}
+
+      {/* Overlay Ballpit fullscreen */}
+      {active && (
+        <div className="fixed inset-0 z-50 bg-black/80 flex items-center justify-center">
+          <Ballpit
+            displayCursor={false}
+            count={150}
+            gravity={0.5}
+            friction={1}
+            wallBounce={0.95}
+            followCursor={true}
+            colors={[0x000000, 0x0000ff, 0x800080, 0xff0000, 0xffffff]}
+            lightIntensity={500}
+          />
+
+          {/* Tombol tutup */}
+          <Button
+            onClick={() => setActive(false)}
+            className="absolute top-4 right-4 bg-red-600 hover:bg-red-700 text-white rounded-full px-3 py-2 shadow-lg"
+          >
+            ✖
+          </Button>
+        </div>
+      )}
+    </>
+  );
+}

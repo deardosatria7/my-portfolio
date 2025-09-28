@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import BallpitOverlay from "@/components/Ballpit";
 import { Geist, Geist_Mono, Inter } from "next/font/google";
 import "./globals.css";
 import SplashCursor from "@/components/SplashCursor";
@@ -24,6 +24,7 @@ export default function RootLayout({
       <body className={`${inter.className} antialiased`}>
         {children}
         <SplashCursor />
+        <BallpitOverlay />
       </body>
     </html>
   );
