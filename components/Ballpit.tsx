@@ -992,7 +992,7 @@ export default function BallpitOverlay() {
       {!active && (
         <button
           onClick={() => setActive(true)}
-          className="fixed bottom-2 left-2 z-50 text-sm rounded-full shadow-lg opacity-10 hover:opacity-90"
+          className="fixed bottom-2 left-2 z-50 text-sm rounded-full shadow-lg opacity-60 hover:opacity-90"
           title="Hmmm... What's this??"
         >
           ⚽
@@ -1001,7 +1001,7 @@ export default function BallpitOverlay() {
 
       {/* Overlay Ballpit fullscreen */}
       {active && (
-        <div className="fixed inset-0 z-50 bg-black/80 flex items-center justify-center">
+        <div className="fixed inset-0 z-40 bg-black/80 flex items-center justify-center">
           <Ballpit
             displayCursor={false}
             count={150}
@@ -1016,7 +1016,7 @@ export default function BallpitOverlay() {
           {/* Tombol tutup */}
           <Button
             onClick={() => setActive(false)}
-            className="absolute top-4 right-4 bg-red-600 hover:bg-red-700 text-white rounded-full px-3 py-2 shadow-lg"
+            className="absolute top-4 right-4 bg-red-600 hover:bg-red-700 text-white rounded-full px-3 py-2 shadow-lg z-50"
           >
             ✖
           </Button>
