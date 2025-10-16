@@ -974,11 +974,9 @@ export default function BallpitOverlay() {
 
   useEffect(() => {
     if (active && canvasRef.current) {
-      // Buat ballpit ketika aktif
       ballpitInstance.current = createBallpit(canvasRef.current);
     }
     return () => {
-      // Hapus instance ketika tidak aktif
       if (ballpitInstance.current) {
         ballpitInstance.current.dispose();
         ballpitInstance.current = null;
@@ -986,40 +984,58 @@ export default function BallpitOverlay() {
     };
   }, [active]);
 
+  // 🔹 Tambahkan handler untuk tombol ESC (opsional)
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setActive(false);
+    };
+    if (active) window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [active]);
+
   return (
     <>
-      {/* Tombol kecil di pojok kiri bawah */}
+      {/* Tombol kecil untuk membuka */}
       {!active && (
         <button
           onClick={() => setActive(true)}
-          className="fixed bottom-2 left-2 z-50 text-sm rounded-full shadow-lg opacity-60 hover:opacity-90"
+          className="fixed bottom-2 left-2 z-50 text-sm rounded-full shadow-lg opacity-60 hover:opacity-90 hidden md:block"
           title="Hmmm... What's this??"
         >
           ⚽
         </button>
       )}
 
-      {/* Overlay Ballpit fullscreen */}
+      {/* Overlay fullscreen */}
       {active && (
-        <div className="fixed inset-0 z-40 bg-black/80 flex items-center justify-center">
-          <Ballpit
-            displayCursor={false}
-            count={150}
-            gravity={0.5}
-            friction={1}
-            wallBounce={0.95}
-            followCursor={true}
-            colors={[0x000000, 0x0000ff, 0x800080, 0xff0000, 0xffffff]}
-            lightIntensity={500}
-          />
+        <div
+          className="fixed inset-0 z-40 bg-black/80 flex items-center justify-center"
+          onClick={() => setActive(false)} // 🔹 klik mana pun menutup overlay
+        >
+          {/* Ballpit layer */}
+          <div className="pointer-events-none absolute inset-0">
+            <Ballpit
+              displayCursor={false}
+              count={150}
+              gravity={0.5}
+              friction={1}
+              wallBounce={0.95}
+              followCursor={true}
+              colors={[0x000000, 0x0000ff, 0x800080, 0xff0000, 0xffffff]}
+              lightIntensity={500}
+            />
+          </div>
 
-          {/* Tombol tutup */}
-          <Button
-            onClick={() => setActive(false)}
+          {/* Tombol X (opsional tetap ada, tapi klik overlay juga bisa menutup) */}
+          {/* <Button
+            onClick={(e) => {
+              e.stopPropagation(); // biar tidak ikut trigger onClick overlay
+              setActive(false);
+            }}
             className="absolute top-4 right-4 bg-red-600 hover:bg-red-700 text-white rounded-full px-3 py-2 shadow-lg z-50"
           >
             ✖
-          </Button>
+          </Button> */}
         </div>
       )}
     </>
