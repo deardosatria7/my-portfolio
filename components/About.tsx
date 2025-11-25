@@ -36,9 +36,9 @@ export default function About() {
           </p>
           <p>
             I am currently working in the IT department of a pharmaceutical
-            distribution company. My job is to develop the company's internal
-            website-based system. Every new challenge is a learning opportunity,
-            and every line of code is a new story I enjoy.
+            distribution company. My job is to develop the company&#39;s
+            internal website-based system. Every new challenge is a learning
+            opportunity, and every line of code is a new story I enjoy.
           </p>
           <p>
             Thank you for visiting this page. Feel free to explore further — who
