@@ -28,7 +28,7 @@ export default function Home() {
                 web apps. Passionate about solving complex problems, writing
                 clean code, and collaborating across teams.
               </p>
-              <div className="mt-10 flex items-center gap-2">
+              <div className="mt-6 flex items-center gap-2">
                 {show == "experience" ? (
                   <Button
                     variant="secondary"

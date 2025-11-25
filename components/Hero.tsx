@@ -1,5 +1,39 @@
 import { ArrowUpRight } from "lucide-react";
 
+type ExperienceProps = {
+  title: string;
+  company_time: string;
+  description: string;
+  link?: string | null;
+};
+
+const experiences: ExperienceProps[] = [
+  {
+    title: "Fullstack Developer",
+    company_time: "Antar Mitra Persada • Sep 2024 - Present",
+    description:
+      "Leading the fullstack development of an internal company web system using Next.js and Supabase. Working closely with end-users to identify needs and translate them into tailored, scalable features that improve operational efficiency acrossdepartments.",
+  },
+  {
+    title: "Custom PC Build Specialist",
+    company_time: "Self-Employed • Aug 2025 - Present",
+    description:
+      "Providing tailored PC building services for clients ranging from casual users to performance-focused gamers and professionals. Offering consultation, hardware selection, and assembly with attention to performance, aesthetics, and budget optimization.",
+  },
+  {
+    title: "Software Tester",
+    company_time: "Tiga Serangkai Inti Corpora • Jan 2023 - Apr 2023",
+    description:
+      "Collaborated closely with developers to identify bugs and recommend improvements, contributing to faster issue resolution and enhanced product quality. Conducted performance testing that significantly reduced load times and improved system responsiveness. Designed and executed comprehensive test scenarios, increasing coverage while reducing redundant testing efforts.",
+  },
+  {
+    title: "Intern Front-end Developer",
+    company_time: "Indonesia Direct • Nov 2021 - Jan 2022",
+    description:
+      "Developed responsive web layouts to ensure optimal performance across various devices. Contributed to building dynamic and interactive UI components using React. Worked alongside UI/UX designers to translate Figma mockups into fully functional web interfaces.",
+  },
+];
+
 export default function Hero() {
   return (
     <>
@@ -10,63 +44,22 @@ export default function Hero() {
             Experience
           </h2>
           <div className="space-y-10">
-            <div className="border-l-2 border-neutral-600 pl-4">
-              <h3 className="text-lg font-medium">Fullstack Developer</h3>
-              <p className="text-neutral-400 text-sm">
-                Antar Mitra Persada • Sep 2024 - Present
-              </p>
-              <p className="text-sm mt-2">
-                Leading the fullstack development of an internal company web
-                system using Next.js and Supabase. Working closely with
-                end-users to identify needs and translate them into tailored,
-                scalable features that improve operational efficiency across
-                departments.
-              </p>
-            </div>
-            <div className="border-l-2 border-neutral-600 pl-4">
-              <h3 className="text-lg font-medium">
-                Custom PC Build Specialist
-              </h3>
-              <p className="text-neutral-400 text-sm">
-                Self-Employed • Aug 2025 - Present
-              </p>
-              <p className="text-sm mt-2">
-                Providing tailored PC building services for clients ranging from
-                casual users to performance-focused gamers and professionals.
-                Offering consultation, hardware selection, and assembly with
-                attention to performance, aesthetics, and budget optimization.
-              </p>
-            </div>
-            <div className="border-l-2 border-neutral-600 pl-4">
-              <h3 className="text-lg font-medium">Software Tester</h3>
-              <p className="text-neutral-400 text-sm">
-                Tiga Serangkai Inti Corpora • Jan 2023 - Apr 2023
-              </p>
-              <p className="text-sm mt-2">
-                Collaborated closely with developers to identify bugs and
-                recommend improvements, contributing to faster issue resolution
-                and enhanced product quality. Conducted performance testing that
-                significantly reduced load times and improved system
-                responsiveness. Designed and executed comprehensive test
-                scenarios, increasing coverage while reducing redundant testing
-                efforts.
-              </p>
-            </div>
-            <div className="border-l-2 border-neutral-600 pl-4">
-              <h3 className="text-lg font-medium">
-                Intern Front-end Developer
-              </h3>
-              <p className="text-neutral-400 text-sm">
-                Indonesia Direct • Nov 2021 - Jan 2022
-              </p>
-              <p className="text-sm mt-2">
-                Developed responsive web layouts to ensure optimal performance
-                across various devices. Contributed to building dynamic and
-                interactive UI components using React. Worked alongside UI/UX
-                designers to translate Figma mockups into fully functional web
-                interfaces.
-              </p>
-            </div>
+            {experiences.map((item) => (
+              <div
+                className="group border-l-2 border-neutral-600 hover:border-green-500 hover:border-l-3 pl-4 transition-all duration-300 hover:translate-x-3"
+                key={item.title}
+              >
+                <h3 className="text-lg font-medium transition-all duration-300 group-hover:text-white">
+                  {item.title}
+                </h3>
+                <p className="text-neutral-400 text-sm transition-all duration-300 group-hover:text-neutral-300">
+                  {item.company_time}
+                </p>
+                <p className="text-sm mt-2 transition-all duration-300 group-hover:text-neutral-200">
+                  {item.description}
+                </p>
+              </div>
+            ))}
           </div>
         </div>
 
@@ -88,7 +81,7 @@ export default function Hero() {
                 ].map((skill) => (
                   <span
                     key={skill}
-                    className="px-3 py-1 bg-neutral-800 border border-neutral-600 rounded-md text-xs"
+                    className="px-3 py-1 bg-neutral-800 border border-neutral-600 rounded-md text-xs hover:scale-110 hover:bg-white hover:text-black duration-200"
                   >
                     {skill}
                   </span>
@@ -108,7 +101,7 @@ export default function Hero() {
                 ].map((skill) => (
                   <span
                     key={skill}
-                    className="px-3 py-1 bg-neutral-800 border border-neutral-600 rounded-md text-xs"
+                    className="px-3 py-1 bg-neutral-800 border border-neutral-600 rounded-md text-xs hover:scale-110 hover:bg-white hover:text-black duration-200"
                   >
                     {skill}
                   </span>
