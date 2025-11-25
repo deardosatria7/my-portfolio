@@ -997,13 +997,14 @@ export default function BallpitOverlay() {
     <>
       {/* Tombol kecil untuk membuka */}
       {!active && (
-        <button
+        <Button
           onClick={() => setActive(true)}
-          className="fixed bottom-2 left-2 z-50 text-sm rounded-full shadow-lg opacity-60 hover:opacity-90 hidden md:block"
-          title="Hmmm... What's this??"
+          className="text-sm shadow-lg hidden md:block hover:cursor-pointer z-50"
+          title="Play balls"
+          variant={"ghost"}
         >
           ⚽
-        </button>
+        </Button>
       )}
 
       {/* Overlay fullscreen */}

@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { ArrowUpRight } from "lucide-react";
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
+import BallpitOverlay from "@/components/Ballpit";
 
 export default function Home() {
   const [show, setShow] = useState<string>("experience");
@@ -17,33 +18,36 @@ export default function Home() {
           <span className="text-2xl font-semibold">Deardo Satria,</span>
           <span className="text-xl text-neutral-400">Fullstack Developer</span>
         </div>
-        <div className="h-fit">
-          {show == "experience" ? (
-            <Button
-              variant="secondary"
-              className="hover:cursor-pointer"
-              onClick={() => setShow("about")}
-            >
-              About
-            </Button>
-          ) : (
-            <Button
-              variant="secondary"
-              className="hover:cursor-pointer"
-              onClick={() => setShow("experience")}
-            >
-              Back
-            </Button>
-          )}
-        </div>
       </section>
       <section className="grid grid-cols-1 md:grid-cols-7 md:gap-4">
         <div className="col-span-2">
           <div className="md:sticky md:top-0 border-t-1 border-neutral-700">
             <div className="py-8 px-4 mb-8 text-sm">
-              Experienced Fullstack Developer with 3+ years crafting dynamic web
-              apps. Passionate about solving complex problems, writing clean
-              code, and collaborating across teams.
+              <p>
+                Experienced Fullstack Developer with 3+ years crafting dynamic
+                web apps. Passionate about solving complex problems, writing
+                clean code, and collaborating across teams.
+              </p>
+              <div className="mt-10 flex items-center gap-2">
+                {show == "experience" ? (
+                  <Button
+                    variant="secondary"
+                    className="hover:cursor-pointer"
+                    onClick={() => setShow("about")}
+                  >
+                    My Story
+                  </Button>
+                ) : (
+                  <Button
+                    variant="secondary"
+                    className="hover:cursor-pointer"
+                    onClick={() => setShow("experience")}
+                  >
+                    Home
+                  </Button>
+                )}
+                <BallpitOverlay />
+              </div>
             </div>
 
             <a
