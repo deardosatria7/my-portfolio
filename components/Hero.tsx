@@ -76,8 +76,9 @@ export default function Hero() {
                   "React",
                   "Next.js",
                   "TypeScript",
+                  "Javascript",
                   "Tailwind CSS",
-                  "Vue.js",
+                  "Shadcn",
                 ].map((skill) => (
                   <span
                     key={skill}
@@ -96,6 +97,7 @@ export default function Hero() {
                   "Python",
                   "PostgreSQL",
                   "Prisma ORM",
+                  "Drizzle ORM",
                   "Supabase",
                   "Docker",
                 ].map((skill) => (
@@ -165,15 +167,16 @@ export default function Hero() {
             <div className="border border-neutral-700 rounded-lg p-4 hover:border-neutral-500 transition-colors">
               <div className="w-full h-32 bg-neutral-800 rounded mb-4 overflow-hidden">
                 <img
-                  src="/pc-mall-screenshot.png"
+                  src="/finance-tracking-ss.png"
                   alt="PintarPy Screenshot"
                   className="w-full h-full object-cover"
                 />
               </div>
-              <h3 className="text-lg font-medium mb-2">PC Mall Zenio</h3>
+              <h3 className="text-lg font-medium mb-2">Finance Tracker</h3>
               <p className="text-sm text-neutral-400 mb-3">
-                PC building website platform with options for custom builds, AI
-                assistant chatbots, and WhatsApp API for notifications.
+                Track your income and expenses with ease. The intuitive
+                dashboard helps you understand your financial situation at a
+                glance.
               </p>
               <div className="flex flex-wrap gap-2 mb-3">
                 <span className="px-2 py-1 bg-neutral-800 text-xs rounded">
@@ -183,15 +186,15 @@ export default function Hero() {
                   PostgreSQL
                 </span>
                 <span className="px-2 py-1 bg-neutral-800 text-xs rounded">
-                  Openai API
+                  Drizzle ORM
                 </span>
                 <span className="px-2 py-1 bg-neutral-800 text-xs rounded">
-                  Whatsapp API
+                  Better Auth
                 </span>
               </div>
               <div className="flex gap-2">
                 <a
-                  href="https://pc-mall.zenio.id"
+                  href="https://keuangan.zenio.id"
                   target="_blank"
                   className="text-xs border border-neutral-600 px-3 py-1 rounded hover:bg-white hover:text-black transition-colors"
                 >
