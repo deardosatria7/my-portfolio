@@ -122,6 +122,33 @@ export default function Hero() {
             <div className="border border-neutral-700 rounded-lg p-4 hover:border-neutral-500 transition-colors">
               <div className="w-full h-32 bg-neutral-800 rounded mb-4 overflow-hidden">
                 <img
+                  src="/cetar-ampersada.png"
+                  alt="PintarPy Screenshot"
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              <h3 className="text-lg font-medium mb-2">CETAR AMPersada</h3>
+              <p className="text-sm text-neutral-400 mb-3">
+                Internal web application developed for a spesific company to
+                manage and monitor purchases, inventory levels, and sales
+                transactions.
+              </p>
+              <div className="flex flex-wrap gap-2 mb-3">
+                <span className="px-2 py-1 bg-neutral-800 text-xs rounded">
+                  Next.js
+                </span>
+                <span className="px-2 py-1 bg-neutral-800 text-xs rounded">
+                  PostgreSQL
+                </span>
+                <span className="px-2 py-1 bg-neutral-800 text-xs rounded">
+                  Supabase
+                </span>
+              </div>
+            </div>
+
+            <div className="border border-neutral-700 rounded-lg p-4 hover:border-neutral-500 transition-colors">
+              <div className="w-full h-32 bg-neutral-800 rounded mb-4 overflow-hidden">
+                <img
                   src="/pintarpy-screenshot.png"
                   alt="PintarPy Screenshot"
                   className="w-full h-full object-cover"
