@@ -8,11 +8,17 @@ type ExperienceProps = {
 };
 
 const experiences: ExperienceProps[] = [
-  {
-    title: "Fullstack Developer",
-    company_time: "Antar Mitra Persada • Sep 2024 - Present",
+   {
+    title: "Fullstack Web Developer",
+    company_time: "Fungsitama Cipta Teknologi • Jan 2026 - Present",
     description:
-      "Leading the fullstack development of an internal company web system using Next.js and Supabase. Working closely with end-users to identify needs and translate them into tailored, scalable features that improve operational efficiency acrossdepartments.",
+      "Assisting the team in developing and maintaining the company's ERP system using Next.js, while partnering with end-users to convert business needs into scalable features that streamline operations across departments.",
+  },
+  {
+    title: "Fullstack Web Developer",
+    company_time: "Antar Mitra Persada • Sep 2024 - Dec 2025",
+    description:
+      "Leading the fullstack development of an internal company web system using Next.js and Supabase. Working closely with end-users to identify needs and translate them into tailored, scalable features that improve operational efficiency across departments.",
   },
   {
     title: "Custom PC Build Specialist",
@@ -20,12 +26,12 @@ const experiences: ExperienceProps[] = [
     description:
       "Providing tailored PC building services for clients ranging from casual users to performance-focused gamers and professionals. Offering consultation, hardware selection, and assembly with attention to performance, aesthetics, and budget optimization.",
   },
-  {
-    title: "Software Tester",
-    company_time: "Tiga Serangkai Inti Corpora • Jan 2023 - Apr 2023",
-    description:
-      "Collaborated closely with developers to identify bugs and recommend improvements, contributing to faster issue resolution and enhanced product quality. Conducted performance testing that significantly reduced load times and improved system responsiveness. Designed and executed comprehensive test scenarios, increasing coverage while reducing redundant testing efforts.",
-  },
+  // {
+  //   title: "Software Tester",
+  //   company_time: "Tiga Serangkai Inti Corpora • Jan 2023 - Apr 2023",
+  //   description:
+  //     "Collaborated closely with developers to identify bugs and recommend improvements, contributing to faster issue resolution and enhanced product quality. Conducted performance testing that significantly reduced load times and improved system responsiveness. Designed and executed comprehensive test scenarios, increasing coverage while reducing redundant testing efforts.",
+  // },
   {
     title: "Intern Front-end Developer",
     company_time: "Indonesia Direct • Nov 2021 - Jan 2022",
@@ -44,10 +50,10 @@ export default function Hero() {
             Experience
           </h2>
           <div className="space-y-10">
-            {experiences.map((item) => (
+            {experiences.map((item, idx) => (
               <div
                 className="group border-l-2 border-neutral-600 hover:border-green-500 hover:border-l-3 pl-4 transition-all duration-300 hover:translate-x-3"
-                key={item.title}
+                key={idx}
               >
                 <h3 className="text-lg font-medium transition-all duration-300 group-hover:text-white">
                   {item.title}
@@ -96,10 +102,12 @@ export default function Hero() {
                   "Node.js",
                   "Python",
                   "PostgreSQL",
+                  "MySQL",
                   "Prisma ORM",
                   "Drizzle ORM",
                   "Supabase",
                   "Docker",
+                  "Git",
                 ].map((skill) => (
                   <span
                     key={skill}
@@ -142,6 +150,9 @@ export default function Hero() {
                 </span>
                 <span className="px-2 py-1 bg-neutral-800 text-xs rounded">
                   Supabase
+                </span>
+                <span className="px-2 py-1 bg-neutral-800 text-xs rounded">
+                  Git
                 </span>
               </div>
             </div>

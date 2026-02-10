@@ -1017,7 +1017,7 @@ export default function BallpitOverlay() {
           <div className="pointer-events-none absolute inset-0">
             <Ballpit
               displayCursor={false}
-              count={150}
+              count={80}
               gravity={0.5}
               friction={1}
               wallBounce={0.95}
