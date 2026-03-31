@@ -152,6 +152,22 @@ export default function Hero() {
                   Hoppscotch
                 </span>
               </div>
+              <div className="flex gap-2">
+                <a
+                  href="https://postman.zenio.id"
+                  target="_blank"
+                  className="text-xs border border-neutral-600 px-3 py-1 rounded hover:bg-white hover:text-black transition-colors"
+                >
+                  Live Demo <ArrowUpRight className="w-3 h-3 inline ml-1" />
+                </a>
+                <a
+                  href="https://hoppscotch.io/"
+                  target="_blank"
+                  className="text-xs border border-neutral-600 px-3 py-1 rounded hover:bg-white hover:text-black transition-colors"
+                >
+                  Official Site <ArrowUpRight className="w-3 h-3 inline ml-1" />
+                </a>
+              </div>
             </div>
 
             <div className="border border-neutral-700 rounded-lg p-4 hover:border-neutral-500 transition-colors">
