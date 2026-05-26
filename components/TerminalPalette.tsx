@@ -350,7 +350,7 @@ export default function TerminalPalette({
             className="fixed bottom-6 right-6 z-40 font-mono text-xs text-neutral-500 border border-neutral-700 px-3 py-2 rounded-md bg-black/80 hover:border-green-500 hover:text-green-400 transition-colors backdrop-blur-sm cursor-pointer select-none"
             title="Open terminal"
           >
-            Ctrl+K ⌨
+            <span className="hidden sm:inline">Ctrl+K </span>⌨
           </motion.button>
         )}
       </AnimatePresence>
@@ -363,32 +363,46 @@ export default function TerminalPalette({
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.15 }}
-            className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm p-4"
+            className="fixed inset-0 z-50 flex items-end sm:items-center justify-center bg-black/70 backdrop-blur-sm sm:p-4"
             onClick={() => setIsOpen(false)}
           >
             <motion.div
-              initial={{ scale: 0.95, y: 16, opacity: 0 }}
-              animate={{ scale: 1, y: 0, opacity: 1 }}
-              exit={{ scale: 0.95, y: 16, opacity: 0 }}
-              transition={{ type: "spring", damping: 28, stiffness: 350 }}
-              className="w-full max-w-2xl bg-[#0a0a0a] border border-neutral-700 rounded-lg shadow-2xl overflow-hidden font-mono"
+              initial={{ y: "100%", opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              exit={{ y: "100%", opacity: 0 }}
+              transition={{ type: "spring", damping: 30, stiffness: 320 }}
+              style={{ originY: 1 }}
+              className="w-full sm:max-w-2xl bg-[#0a0a0a] border border-neutral-700 sm:rounded-lg rounded-t-xl shadow-2xl overflow-hidden font-mono"
               onClick={(e) => e.stopPropagation()}
             >
               {/* Title bar */}
               <div className="flex items-center gap-2 px-4 py-3 bg-neutral-900 border-b border-neutral-800">
-                <button
-                  onClick={() => setIsOpen(false)}
-                  className="w-3 h-3 rounded-full bg-red-500 hover:bg-red-400 transition-colors cursor-pointer"
-                />
-                <div className="w-3 h-3 rounded-full bg-yellow-500" />
-                <div className="w-3 h-3 rounded-full bg-green-500" />
-                <span className="ml-3 text-xs text-neutral-500 select-none">
+                {/* macOS dots — hidden on mobile, replaced with drag handle */}
+                <div className="hidden sm:flex items-center gap-2">
+                  <button
+                    onClick={() => setIsOpen(false)}
+                    className="w-3 h-3 rounded-full bg-red-500 hover:bg-red-400 transition-colors cursor-pointer"
+                  />
+                  <div className="w-3 h-3 rounded-full bg-yellow-500" />
+                  <div className="w-3 h-3 rounded-full bg-green-500" />
+                </div>
+                {/* Mobile: drag indicator + close button */}
+                <div className="flex sm:hidden w-full items-center justify-between">
+                  <span className="text-xs text-neutral-500 select-none">terminal</span>
+                  <button
+                    onClick={() => setIsOpen(false)}
+                    className="text-neutral-500 hover:text-white text-lg leading-none px-1"
+                  >
+                    ✕
+                  </button>
+                </div>
+                <span className="hidden sm:inline ml-3 text-xs text-neutral-500 select-none">
                   terminal — visitor@deardo.dev
                 </span>
               </div>
 
               {/* History */}
-              <div className="h-72 overflow-y-auto p-4 space-y-0.5 text-sm scrollbar-thin">
+              <div className="h-56 sm:h-72 overflow-y-auto p-3 sm:p-4 space-y-0.5 text-xs sm:text-sm scrollbar-thin">
                 {history.map((line, i) => (
                   <div
                     key={i}
@@ -404,9 +418,10 @@ export default function TerminalPalette({
                   >
                     {line.type === "input" ? (
                       <span>
-                        <span className="text-green-500 mr-2 select-none">
+                        <span className="text-green-500 mr-2 select-none hidden sm:inline">
                           {PROMPT}
                         </span>
+                        <span className="text-green-500 mr-2 select-none sm:hidden">$</span>
                         {line.text}
                       </span>
                     ) : line.text ? (
@@ -420,16 +435,17 @@ export default function TerminalPalette({
               </div>
 
               {/* Input row */}
-              <div className="flex items-center gap-2 px-4 py-3 border-t border-neutral-800">
-                <span className="text-green-500 text-sm whitespace-nowrap select-none">
+              <div className="flex items-center gap-2 px-3 sm:px-4 py-3 border-t border-neutral-800">
+                <span className="text-green-500 text-xs sm:text-sm whitespace-nowrap select-none hidden sm:inline">
                   {PROMPT}
                 </span>
+                <span className="text-green-500 text-xs whitespace-nowrap select-none sm:hidden">$</span>
                 <input
                   ref={inputRef}
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
                   onKeyDown={handleKeyDown}
-                  className="flex-1 bg-transparent text-white text-sm outline-none caret-green-400 placeholder-neutral-700"
+                  className="flex-1 bg-transparent text-white text-xs sm:text-sm outline-none caret-green-400 placeholder-neutral-700"
                   autoComplete="off"
                   autoCorrect="off"
                   autoCapitalize="off"

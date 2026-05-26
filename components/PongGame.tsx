@@ -1,170 +1,174 @@
 "use client";
 import { useEffect, useRef } from "react";
 
-export default function PongGame() {
+type Difficulty = "easy" | "medium" | "hard";
+
+interface PongGameProps {
+  difficulty?: Difficulty;
+  // fine-grained overrides — take precedence over difficulty preset
+  aiSpeed?: number;
+  ballSpeed?: number;
+  ballAcceleration?: number; // added to ball speed on each paddle hit
+}
+
+const PRESETS: Record<Difficulty, { aiSpeed: number; ballSpeed: number; ballAcceleration: number }> = {
+  easy:   { aiSpeed: 1.2, ballSpeed: 2,   ballAcceleration: 0 },
+  medium: { aiSpeed: 1.9, ballSpeed: 2.5, ballAcceleration: 0.15 },
+  hard:   { aiSpeed: 2.8, ballSpeed: 3.2, ballAcceleration: 0.3 },
+};
+
+export default function PongGame({
+  difficulty = "medium",
+  aiSpeed,
+  ballSpeed,
+  ballAcceleration,
+}: PongGameProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+
+  const preset = PRESETS[difficulty];
+  const cfg = {
+    aiSpeed:          aiSpeed          ?? preset.aiSpeed,
+    ballSpeed:        ballSpeed        ?? preset.ballSpeed,
+    ballAcceleration: ballAcceleration ?? preset.ballAcceleration,
+  };
 
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
-
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
-    const width = canvas.width;
+    const width  = canvas.width;
     const height = canvas.height;
 
     const paddleHeight = 40;
-    const paddleWidth = 8;
-    let playerY = height / 2 - paddleHeight / 2;
-    let enemyY = height / 2 - paddleHeight / 2;
+    const paddleWidth  = 8;
+    const ballRadius   = 4;
 
-    let ballX = width / 2;
-    let ballY = height / 2;
-    const ballRadius = 4;
-    let ballSpeedX = 2;
-    let ballSpeedY = 2;
-
+    let playerY    = height / 2 - paddleHeight / 2;
+    let enemyY     = height / 2 - paddleHeight / 2;
+    let ballX      = width  / 2;
+    let ballY      = height / 2;
+    let ballSpeedX = cfg.ballSpeed;
+    let ballSpeedY = cfg.ballSpeed;
     let playerScore = 0;
-    let enemyScore = 0;
-
-    const drawRect = (
-      x: number,
-      y: number,
-      w: number,
-      h: number,
-      color: string
-    ) => {
-      ctx.fillStyle = color;
-      ctx.fillRect(x, y, w, h);
-    };
-
-    const drawBall = (x: number, y: number, r: number, color: string) => {
-      ctx.fillStyle = color;
-      ctx.beginPath();
-      ctx.arc(x, y, r, 0, Math.PI * 2);
-      ctx.fill();
-    };
-
-    const drawCenterLine = () => {
-      ctx.strokeStyle = "#444";
-      ctx.beginPath();
-      ctx.setLineDash([4, 4]);
-      ctx.moveTo(width / 2, 0);
-      ctx.lineTo(width / 2, height);
-      ctx.stroke();
-      ctx.setLineDash([]);
-    };
-
-    const drawScore = () => {
-      ctx.fillStyle = "#ccc";
-      ctx.font = "12px monospace";
-      ctx.textAlign = "center";
-      ctx.fillText(`${playerScore}`, width / 4, 20); // kiri
-      ctx.fillText(`${enemyScore}`, (3 * width) / 4, 20); // kanan
-    };
+    let enemyScore  = 0;
+    let rafId       = 0;
 
     const resetBall = (direction: number) => {
-      ballX = width / 2;
-      ballY = height / 2;
-      ballSpeedX = 2 * direction; // arah bola tergantung siapa yang kebobolan
-      ballSpeedY = 2 * (Math.random() > 0.5 ? 1 : -1);
+      ballX      = width  / 2;
+      ballY      = height / 2;
+      ballSpeedX = cfg.ballSpeed * direction;
+      ballSpeedY = cfg.ballSpeed * (Math.random() > 0.5 ? 1 : -1);
     };
 
     const update = () => {
       ballX += ballSpeedX;
       ballY += ballSpeedY;
 
-      // Bounce atas/bawah
+      // Wall bounce top/bottom
       if (ballY - ballRadius < 0 || ballY + ballRadius > height) {
         ballSpeedY = -ballSpeedY;
       }
 
-      // Bounce paddle kiri (player)
+      // Player paddle (left)
       if (
         ballX - ballRadius < paddleWidth &&
         ballY > playerY &&
         ballY < playerY + paddleHeight
       ) {
-        ballSpeedX = -ballSpeedX;
+        ballSpeedX = Math.abs(ballSpeedX) + cfg.ballAcceleration;
       }
 
-      // Bounce paddle kanan (musuh)
+      // Enemy paddle (right)
       if (
         ballX + ballRadius > width - paddleWidth &&
         ballY > enemyY &&
         ballY < enemyY + paddleHeight
       ) {
-        ballSpeedX = -ballSpeedX;
+        ballSpeedX = -(Math.abs(ballSpeedX) + cfg.ballAcceleration);
       }
 
-      // Reset bola + tambah skor
+      // Score
       if (ballX - ballRadius < 0) {
         enemyScore++;
-        resetBall(1); // arah ke kanan
+        resetBall(1);
       }
       if (ballX + ballRadius > width) {
         playerScore++;
-        resetBall(-1); // arah ke kiri
+        resetBall(-1);
       }
 
-      // AI musuh (lemah)
+      // AI tracking with deadzone
       const enemyCenter = enemyY + paddleHeight / 2;
-      if (enemyCenter < ballY - 10) {
-        enemyY += 1.6; // Lebih lambat
-      } else if (enemyCenter > ballY + 10) {
-        enemyY -= 1.6;
-      }
+      if (enemyCenter < ballY - 8) enemyY += cfg.aiSpeed;
+      else if (enemyCenter > ballY + 8) enemyY -= cfg.aiSpeed;
+      enemyY = Math.max(0, Math.min(height - paddleHeight, enemyY));
     };
 
     const render = () => {
       ctx.clearRect(0, 0, width, height);
-      drawCenterLine();
-      drawRect(0, playerY, paddleWidth, paddleHeight, "#ccc");
-      drawRect(width - paddleWidth, enemyY, paddleWidth, paddleHeight, "#ccc");
-      drawBall(ballX, ballY, ballRadius, "#ccc");
-      drawScore();
+
+      // Center line
+      ctx.strokeStyle = "#333";
+      ctx.setLineDash([4, 4]);
+      ctx.beginPath();
+      ctx.moveTo(width / 2, 0);
+      ctx.lineTo(width / 2, height);
+      ctx.stroke();
+      ctx.setLineDash([]);
+
+      // Paddles
+      ctx.fillStyle = "#ccc";
+      ctx.fillRect(0, playerY, paddleWidth, paddleHeight);
+      ctx.fillRect(width - paddleWidth, enemyY, paddleWidth, paddleHeight);
+
+      // Ball
+      ctx.beginPath();
+      ctx.arc(ballX, ballY, ballRadius, 0, Math.PI * 2);
+      ctx.fill();
+
+      // Score
+      ctx.fillStyle = "#888";
+      ctx.font = "12px monospace";
+      ctx.textAlign = "center";
+      ctx.fillText(`${playerScore}`, width / 4, 20);
+      ctx.fillText(`${enemyScore}`, (3 * width) / 4, 20);
     };
 
-    const gameLoop = () => {
+    const loop = () => {
       update();
       render();
-      requestAnimationFrame(gameLoop);
+      rafId = requestAnimationFrame(loop);
     };
 
-    // Mouse & Touch support
     const movePlayer = (y: number) => {
-      playerY = y - paddleHeight / 2;
-      if (playerY < 0) playerY = 0;
-      if (playerY + paddleHeight > height) playerY = height - paddleHeight;
+      playerY = Math.max(0, Math.min(height - paddleHeight, y - paddleHeight / 2));
     };
 
-    const handleMouseMove = (e: MouseEvent) => {
-      const rect = canvas.getBoundingClientRect();
-      movePlayer(e.clientY - rect.top);
+    const onMouseMove = (e: MouseEvent) => {
+      movePlayer(e.clientY - canvas.getBoundingClientRect().top);
+    };
+    const onTouchMove = (e: TouchEvent) => {
+      movePlayer(e.touches[0].clientY - canvas.getBoundingClientRect().top);
     };
 
-    const handleTouchMove = (e: TouchEvent) => {
-      const rect = canvas.getBoundingClientRect();
-      const touchY = e.touches[0].clientY - rect.top;
-      movePlayer(touchY);
-    };
-
-    canvas.addEventListener("mousemove", handleMouseMove);
-    canvas.addEventListener("touchmove", handleTouchMove);
-
-    gameLoop();
+    canvas.addEventListener("mousemove", onMouseMove);
+    canvas.addEventListener("touchmove", onTouchMove);
+    rafId = requestAnimationFrame(loop);
 
     return () => {
-      canvas.removeEventListener("mousemove", handleMouseMove);
-      canvas.removeEventListener("touchmove", handleTouchMove);
+      cancelAnimationFrame(rafId);
+      canvas.removeEventListener("mousemove", onMouseMove);
+      canvas.removeEventListener("touchmove", onTouchMove);
     };
-  }, []);
+  }, [cfg.aiSpeed, cfg.ballSpeed, cfg.ballAcceleration]);
 
   return (
-    <div className="mt-20 text-center">
+    <div className="text-center">
       <p className="mb-2 text-sm text-neutral-400">
-        🎮 Bonus: Try beat me at Pong!
+        🎮 Try beat me at Pong!
+        <span className="ml-2 text-xs text-neutral-600 capitalize">[{difficulty}]</span>
       </p>
       <canvas
         ref={canvasRef}

@@ -1025,6 +1025,7 @@ export default function BallpitOverlay({ forceOpen, onForceClose }: BallpitOverl
         <div
           className="fixed inset-0 z-40 bg-black/80 flex items-center justify-center"
           onClick={handleClose}
+          onTouchEnd={handleClose}
         >
           {/* Ballpit layer */}
           <div className="pointer-events-none absolute inset-0">
@@ -1040,16 +1041,15 @@ export default function BallpitOverlay({ forceOpen, onForceClose }: BallpitOverl
             />
           </div>
 
-          {/* Tombol X (opsional tetap ada, tapi klik overlay juga bisa menutup) */}
-          {/* <Button
-            onClick={(e) => {
-              e.stopPropagation(); // biar tidak ikut trigger onClick overlay
-              setActive(false);
-            }}
-            className="absolute top-4 right-4 bg-red-600 hover:bg-red-700 text-white rounded-full px-3 py-2 shadow-lg z-50"
+          {/* Close button — always visible, especially important on mobile */}
+          <button
+            onClick={(e) => { e.stopPropagation(); handleClose(); }}
+            onTouchEnd={(e) => { e.stopPropagation(); handleClose(); }}
+            className="absolute top-4 right-4 z-50 pointer-events-auto text-white/60 hover:text-white bg-black/40 hover:bg-black/70 rounded-full w-10 h-10 flex items-center justify-center text-lg transition-colors"
+            aria-label="Close"
           >
-            ✖
-          </Button> */}
+            ✕
+          </button>
         </div>
       )}
     </>

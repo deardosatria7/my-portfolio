@@ -178,7 +178,7 @@ export default function Home() {
               >
                 <X className="w-5 h-5" />
               </button>
-              <PongGame />
+              <PongGame difficulty="hard" />
             </motion.div>
           </motion.div>
         )}
