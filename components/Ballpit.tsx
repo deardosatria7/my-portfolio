@@ -967,10 +967,24 @@ const Ballpit: React.FC<BallpitProps> = ({
   return <canvas className={`${className} w-full h-full`} ref={canvasRef} />;
 };
 
-export default function BallpitOverlay() {
+interface BallpitOverlayProps {
+  forceOpen?: boolean;
+  onForceClose?: () => void;
+}
+
+export default function BallpitOverlay({ forceOpen, onForceClose }: BallpitOverlayProps = {}) {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const [active, setActive] = useState(false);
   const ballpitInstance = useRef<any>(null);
+
+  useEffect(() => {
+    if (forceOpen) setActive(true);
+  }, [forceOpen]);
+
+  const handleClose = () => {
+    setActive(false);
+    onForceClose?.();
+  };
 
   useEffect(() => {
     if (active && canvasRef.current) {
@@ -984,10 +998,9 @@ export default function BallpitOverlay() {
     };
   }, [active]);
 
-  // 🔹 Tambahkan handler untuk tombol ESC (opsional)
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape") setActive(false);
+      if (e.key === "Escape") handleClose();
     };
     if (active) window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
@@ -1011,7 +1024,7 @@ export default function BallpitOverlay() {
       {active && (
         <div
           className="fixed inset-0 z-40 bg-black/80 flex items-center justify-center"
-          onClick={() => setActive(false)} // 🔹 klik mana pun menutup overlay
+          onClick={handleClose}
         >
           {/* Ballpit layer */}
           <div className="pointer-events-none absolute inset-0">

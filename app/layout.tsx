@@ -1,6 +1,5 @@
 import { Geist, Geist_Mono, Inter } from "next/font/google";
 import "./globals.css";
-import SplashCursor from "@/components/SplashCursor";
 
 const inter = Inter({ subsets: ["latin"] });
 const geistSans = Geist({
@@ -62,7 +61,6 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${inter.className} antialiased`}>
         {children}
-        <SplashCursor />
       </body>
     </html>
   );
