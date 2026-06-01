@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { ArrowUpRight } from "lucide-react";
 
 type ExperienceProps = {
@@ -127,12 +128,54 @@ export default function Hero() {
             Project Showcase
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+
             <div className="border border-neutral-700 rounded-lg p-4 hover:border-neutral-500 transition-colors">
-              <div className="w-full h-32 bg-neutral-800 rounded mb-4 overflow-hidden">
-                <img
+              <div className="relative w-full h-32 bg-neutral-800 rounded mb-4 overflow-hidden">
+                <Image
+                  src="/yt-downloader-ss.png"
+                  alt="YT Downloader"
+                  fill
+                  className="object-cover"
+                />
+              </div>
+              <h3 className="text-lg font-medium mb-2">YT Downloader</h3>
+              <p className="text-sm text-neutral-400 mb-3">
+                Download videos from YouTube and Twitter with ease. Fast,
+                simple, and works directly in the browser without any
+                installation required.
+              </p>
+              <div className="flex flex-wrap gap-2 mb-3">
+                <span className="px-2 py-1 bg-neutral-800 text-xs rounded">
+                  Next.js
+                </span>
+                <span className="px-2 py-1 bg-neutral-800 text-xs rounded">
+                  Python
+                </span>
+                <span className="px-2 py-1 bg-neutral-800 text-xs rounded">
+                  Node.js
+                </span>
+                <span className="px-2 py-1 bg-neutral-800 text-xs rounded">
+                  yt-dlp
+                </span>
+              </div>
+              <div className="flex gap-2">
+                <a
+                  href="https://yt.zenio.id"
+                  target="_blank"
+                  className="text-xs border border-neutral-600 px-3 py-1 rounded hover:bg-white hover:text-black transition-colors"
+                >
+                  Live Demo <ArrowUpRight className="w-3 h-3 inline ml-1" />
+                </a>
+              </div>
+            </div>
+
+            <div className="border border-neutral-700 rounded-lg p-4 hover:border-neutral-500 transition-colors">
+              <div className="relative w-full h-32 bg-neutral-800 rounded mb-4 overflow-hidden">
+                <Image
                   src="/pintarpy-screenshot.png"
                   alt="PintarPy Screenshot"
-                  className="w-full h-full object-cover"
+                  fill
+                  className="object-cover"
                 />
               </div>
               <h3 className="text-lg font-medium mb-2">PintarPy</h3>
@@ -173,11 +216,12 @@ export default function Hero() {
             </div>
 
             <div className="border border-neutral-700 rounded-lg p-4 hover:border-neutral-500 transition-colors">
-              <div className="w-full h-32 bg-neutral-800 rounded mb-4 overflow-hidden">
-                <img
+              <div className="relative w-full h-32 bg-neutral-800 rounded mb-4 overflow-hidden">
+                <Image
                   src="/finance-tracking-ss.png"
-                  alt="PintarPy Screenshot"
-                  className="w-full h-full object-cover"
+                  alt="Finance Tracker Screenshot"
+                  fill
+                  className="object-cover"
                 />
               </div>
               <h3 className="text-lg font-medium mb-2">Finance Tracker</h3>
@@ -219,11 +263,12 @@ export default function Hero() {
             </div>
 
             <div className="border border-neutral-700 rounded-lg p-4 hover:border-neutral-500 transition-colors">
-              <div className="w-full h-32 bg-neutral-800 rounded mb-4 overflow-hidden">
-                <img
+              <div className="relative w-full h-32 bg-neutral-800 rounded mb-4 overflow-hidden">
+                <Image
                   src="/cetar-ampersada.png"
-                  alt="PintarPy Screenshot"
-                  className="w-full h-full object-cover"
+                  alt="CETAR AMPersada Screenshot"
+                  fill
+                  className="object-cover"
                 />
               </div>
               <h3 className="text-lg font-medium mb-2">CETAR AMPersada</h3>

@@ -21,7 +21,7 @@ export default function Home() {
   const [show, setShow] = useState<string>("experience");
   const [ballpitForceOpen, setBallpitForceOpen] = useState(false);
   const [pongOpen, setPongOpen] = useState(false);
-  const [cursorEnabled, setCursorEnabled] = useState(true);
+  const [cursorEnabled, setCursorEnabled] = useState(false);
   const bottomRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
