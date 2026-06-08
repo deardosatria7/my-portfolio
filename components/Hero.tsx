@@ -125,9 +125,53 @@ export default function Hero() {
         {/* Project Showcase Section */}
         <div>
           <h2 className="text-2xl font-semibold mb-6 border-b border-neutral-700 pb-2">
-            Project Showcase
+            Projects
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="border border-neutral-700 rounded-lg p-4 hover:border-neutral-500 transition-colors">
+              <div className="relative w-full h-32 bg-neutral-800 rounded mb-4 overflow-hidden">
+                <Image
+                  src="/beam-ss.png"
+                  alt="Beam Screenshot"
+                  fill
+                  className="object-cover"
+                />
+              </div>
+              <h3 className="text-lg font-medium mb-2">Beam</h3>
+              <p className="text-sm text-neutral-400 mb-3">
+                Send files directly between two devices over WebRTC. The browser
+                does the transfer peer-to-peer, the server only brokers the
+                WebRTC handshake. No uploads, no database, no files ever stored
+                on a server.
+              </p>
+              <div className="flex flex-wrap gap-2 mb-3">
+                <span className="px-2 py-1 bg-neutral-800 text-xs rounded">
+                  Next.js
+                </span>
+                <span className="px-2 py-1 bg-neutral-800 text-xs rounded">
+                  Node.js
+                </span>
+                <span className="px-2 py-1 bg-neutral-800 text-xs rounded">
+                  Websocket
+                </span>
+              </div>
+              <div className="flex gap-2">
+                <a
+                  href="https://beam.zenio.id"
+                  target="_blank"
+                  className="text-xs border border-neutral-600 px-3 py-1 rounded hover:bg-white hover:text-black transition-colors"
+                >
+                  Live Demo <ArrowUpRight className="w-3 h-3 inline ml-1" />
+                </a>
+                <a
+                  href="https://github.com/deardosatria7"
+                  target="_blank"
+                  className="text-xs border border-neutral-600 px-3 py-1 rounded hover:bg-white hover:text-black transition-colors"
+                >
+                  GitHub <ArrowUpRight className="w-3 h-3 inline ml-1" />
+                </a>
+              </div>
+            </div>
 
             <div className="border border-neutral-700 rounded-lg p-4 hover:border-neutral-500 transition-colors">
               <div className="relative w-full h-32 bg-neutral-800 rounded mb-4 overflow-hidden">
@@ -165,6 +209,13 @@ export default function Hero() {
                   className="text-xs border border-neutral-600 px-3 py-1 rounded hover:bg-white hover:text-black transition-colors"
                 >
                   Live Demo <ArrowUpRight className="w-3 h-3 inline ml-1" />
+                </a>
+                <a
+                  href="https://github.com/deardosatria7"
+                  target="_blank"
+                  className="text-xs border border-neutral-600 px-3 py-1 rounded hover:bg-white hover:text-black transition-colors"
+                >
+                  GitHub <ArrowUpRight className="w-3 h-3 inline ml-1" />
                 </a>
               </div>
             </div>
@@ -259,37 +310,6 @@ export default function Hero() {
                 >
                   GitHub <ArrowUpRight className="w-3 h-3 inline ml-1" />
                 </a>
-              </div>
-            </div>
-
-            <div className="border border-neutral-700 rounded-lg p-4 hover:border-neutral-500 transition-colors">
-              <div className="relative w-full h-32 bg-neutral-800 rounded mb-4 overflow-hidden">
-                <Image
-                  src="/cetar-ampersada.png"
-                  alt="CETAR AMPersada Screenshot"
-                  fill
-                  className="object-cover"
-                />
-              </div>
-              <h3 className="text-lg font-medium mb-2">CETAR AMPersada</h3>
-              <p className="text-sm text-neutral-400 mb-3">
-                Internal web application developed for a spesific company to
-                manage and monitor purchases, inventory levels, and sales
-                transactions.
-              </p>
-              <div className="flex flex-wrap gap-2 mb-3">
-                <span className="px-2 py-1 bg-neutral-800 text-xs rounded">
-                  Next.js
-                </span>
-                <span className="px-2 py-1 bg-neutral-800 text-xs rounded">
-                  PostgreSQL
-                </span>
-                <span className="px-2 py-1 bg-neutral-800 text-xs rounded">
-                  Supabase
-                </span>
-                <span className="px-2 py-1 bg-neutral-800 text-xs rounded">
-                  Git
-                </span>
               </div>
             </div>
           </div>
