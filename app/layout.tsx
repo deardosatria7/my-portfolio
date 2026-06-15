@@ -1,10 +1,26 @@
-import { Geist, Geist_Mono, Inter } from "next/font/google";
+import { Playfair_Display, JetBrains_Mono, Outfit } from "next/font/google";
 import "./globals.css";
 
-const inter = Inter({ subsets: ["latin"] });
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const playfairDisplay = Playfair_Display({
+  variable: "--font-display",
   subsets: ["latin"],
+  weight: ["400", "600", "700"],
+  style: ["normal", "italic"],
+  display: "swap",
+});
+
+const jetbrainsMono = JetBrains_Mono({
+  variable: "--font-mono-ds",
+  subsets: ["latin"],
+  weight: ["400", "500", "600"],
+  display: "swap",
+});
+
+const outfit = Outfit({
+  variable: "--font-body-ds",
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600"],
+  display: "swap",
 });
 
 export const metadata = {
@@ -59,7 +75,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${inter.className} antialiased`}>
+      <body
+        className={`${playfairDisplay.variable} ${jetbrainsMono.variable} ${outfit.variable} antialiased`}
+      >
         {children}
       </body>
     </html>
