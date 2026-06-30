@@ -158,7 +158,7 @@ export default function TerminalPalette({
             "  Contact Information:",
             "",
             "  Email    →  deardosatria1@gmail.com",
-            "  WhatsApp →  +62 812-1668-0537",
+            "  WhatsApp →  tap the WhatsApp button in the Contact section",
             "  LinkedIn →  /in/deardo-satria-5a8b69278",
             "",
           ]);
