@@ -10,13 +10,13 @@ const experiences = [
   },
   {
     title: "Fullstack Web Developer",
-    company_time: "Antar Mitra Persada  ·  Sep 2024 — Dec 2026",
+    company_time: "Antar Mitra Persada  ·  Sep 2024 — Dec 2025",
     description:
       "Leading the fullstack development of an internal company web system using Next.js and Supabase. Working closely with end-users to identify needs and translate them into tailored, scalable features that improve operational efficiency.",
   },
   {
     title: "Custom PC Build Specialist",
-    company_time: "Self-Employed  ·  Aug 2026 — Present",
+    company_time: "Self-Employed  ·  Aug 2025 — Present",
     description:
       "Providing tailored PC building services for clients ranging from casual users to performance-focused gamers. Offering consultation, hardware selection, and assembly with attention to performance, aesthetics, and budget.",
   },
